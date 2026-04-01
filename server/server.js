@@ -24,19 +24,17 @@ const app = express();
 
 //  Middlewares
  const allowedOrigins = [
-  process.env.CLIENT_URL_DEV,
-  process.env.CLIENT_URL_PREVIEW,
+  process.env.CLIENT_URL
 ];
+
+ import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("CORS not allowed"));
-      }
-    },
+    origin: process.env.CLIENT_URL,
     credentials: true,
   })
 );
@@ -56,7 +54,7 @@ app.use("/api/payment", paymentRoutes);
 app.use("/api/users", userRoutes);
 
 //  Start server
-const PORT = process.env.PORT ;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, async () => {
   console.log(`🚀 Server running on port ${PORT}`);
