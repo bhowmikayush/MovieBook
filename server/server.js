@@ -27,10 +27,7 @@ const app = express();
   process.env.CLIENT_URL
 ];
 
- import cors from "cors";
-import dotenv from "dotenv";
 
-dotenv.config();
 
 app.use(
   cors({
